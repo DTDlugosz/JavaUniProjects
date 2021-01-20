@@ -50,6 +50,7 @@ public class Calculator extends Application {
 
         TextField resultTF = new TextField();
         resultTF.setAlignment(Pos.CENTER_RIGHT);
+        resultTF.setDisable(true);
 
         Button addButton = new Button("+");
         addButton.setPrefSize(30,30);
@@ -62,6 +63,9 @@ public class Calculator extends Application {
 
         Button divButton = new Button("/");
         divButton.setPrefSize(30,30);
+
+        Button powButton = new Button("^");
+        powButton.setPrefSize(30,30);
 
 
         // add listeners to the buttons
@@ -93,10 +97,15 @@ public class Calculator extends Application {
             }
         });
 
+        powButton.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {powerNumbers(input1TF, input2TF, resultTF); }
+        });
+
         // add the controls to the boxes
         topHBox.getChildren().addAll(input1TF, input2TF);
-        middleHBox.getChildren().addAll(addButton, subButton, multButton, divButton);
-        bottomHBox.getChildren().add(resultTF);
+        bottomHBox.getChildren().addAll(addButton, subButton, multButton, divButton, powButton);
+        middleHBox.getChildren().add(resultTF);
 
         // add the boxes to the border layout
         borderPane.setTop(topHBox);
@@ -108,6 +117,19 @@ public class Calculator extends Application {
         primaryStage.setScene(scene);
         primaryStage.show();
 
+    }
+
+    private void powerNumbers(TextField inputTF1, TextField inputTF2, TextField resultTF) {
+        try {
+            double d1 = new Double(inputTF1.getText());
+            double d2 = new Double(inputTF2.getText());
+
+            double result = Math.pow(d1, d2);
+
+            resultTF.setText("" + result);
+        } catch (NumberFormatException e) {
+            resultTF.setText("Not a number");
+        }
     }
 
     private void addNumbers(TextField input1TF, TextField input2TF, TextField resultTF) {
