@@ -1,4 +1,4 @@
-package Week13.DialogBox;
+package Week13;
 
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
